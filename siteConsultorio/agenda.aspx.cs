@@ -17,8 +17,38 @@ public partial class agenda : System.Web.UI.Page
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string nome = DropDownList1.SelectedItem.ToString();
+        string nome = ddlMedico.SelectedItem.ToString();
         con.Open();
         string comando = "sp_verConsultas ";
+    }
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void GridView1_Load(object sender, EventArgs e)
+    {
+        
+    }
+
+    protected void GridView1_DataBound(object sender, EventArgs e)
+    {
+       
+    }
+
+    protected void GridView1_DataBinding(object sender, EventArgs e)
+    {
+   
+    }
+
+    protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        Label4.Visible = true;
+    }
+
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        Label4.Visible = false;
     }
 }

@@ -1,13 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="paginapaciente.aspx.cs" Inherits="paginapaciente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paciente.master" AutoEventWireup="true" CodeFile="paginapaciente.aspx.cs" Inherits="paginapaciente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
-    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal">
-        <Items>
-            <asp:MenuItem Text="Ver Exames" Value="Ver Exames " NavigateUrl="exame.aspx"></asp:MenuItem>
-            <asp:MenuItem NavigateUrl="agenda.aspx" Text="Agendar Consulta     " Value="Agendar Consulta"></asp:MenuItem>
-            <asp:MenuItem NavigateUrl="paciente.aspx" Text="Ver Consultas" Value="Ver Consultas"></asp:MenuItem>
-        </Items>
-    </asp:Menu>
+    <br />
     <br />
     &nbsp;&nbsp;&nbsp;
     <asp:Label ID="lblNome" runat="server"></asp:Label>
@@ -16,6 +10,16 @@
 &nbsp;&nbsp;&nbsp;
     <asp:Image ID="imgFoto" runat="server" Height="180px" Width="160px"/>
     <br />
+    &nbsp;&nbsp;&nbsp;
+    <br />
+&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Label1" runat="server" Text="Envie uma imagem:" Visible="False"></asp:Label>
+        &nbsp;<asp:FileUpload ID="fupfoto" runat="server" Enabled="False" EnableTheming="True" EnableViewState="False" Visible="False" />
+        &nbsp;<br />
+&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="btnEnviar" runat="server" Enabled="False" OnClick="btnEnviar_Click" Text="Enviar" Visible="False" />
+        <br />
+&nbsp;&nbsp;&nbsp;
     <br />
 &nbsp;&nbsp;&nbsp;
     <asp:Label ID="lblEmail" runat="server"></asp:Label>

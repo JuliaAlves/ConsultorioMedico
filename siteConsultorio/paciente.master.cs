@@ -70,14 +70,14 @@ public partial class SiteMaster : MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         con = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
-        string cmd = "SELECT idMedico FROM usuarioMedico WHERE idUsuario = '" + Session["usuario"] + "'";
+        string cmd = "SELECT idPaciente FROM usuarioPaciente WHERE idUsuario = '" + Session["usuario"] + "'";
         SqlCommand comando = new SqlCommand(cmd, con);
         con.Open();
         SqlDataReader rdr = comando.ExecuteReader();
         if (rdr.HasRows)
         {
             rdr.Read();
-            cmd = "SELECT * FROM Medico WHERE id = " + rdr["idMedico"];
+            cmd = "SELECT * FROM Paciente WHERE id = " + rdr["idPaciente"];
             comando = new SqlCommand(cmd, con);
             rdr.Close();
             rdr = comando.ExecuteReader();
@@ -99,7 +99,7 @@ public partial class SiteMaster : MasterPage
     {
 
     }
-
+    
     protected void logout()
     {
         Session["usuario"] = "";

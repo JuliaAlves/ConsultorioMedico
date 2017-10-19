@@ -12,7 +12,10 @@ public partial class agenda : System.Web.UI.Page
     SqlConnection con;
     protected void Page_Load(object sender, EventArgs e)
     {
-        con = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);        
+        if (Session["usuario"] == null)
+            Response.Redirect("Default.aspx");
+        else
+            con = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);        
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -20,26 +23,6 @@ public partial class agenda : System.Web.UI.Page
         string nome = ddlMedico.SelectedItem.ToString();
         con.Open();
         string comando = "sp_verConsultas ";
-    }
-
-    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void GridView1_Load(object sender, EventArgs e)
-    {
-        
-    }
-
-    protected void GridView1_DataBound(object sender, EventArgs e)
-    {
-       
-    }
-
-    protected void GridView1_DataBinding(object sender, EventArgs e)
-    {
-   
     }
 
     protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
@@ -50,5 +33,19 @@ public partial class agenda : System.Web.UI.Page
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         Label4.Visible = false;
+    }
+    protected void btnAgendar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("agConsulta.aspx");
+    }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "edit")
+        {
+            int i = int.Parse((string)e.CommandArgument);
+            Console.WriteLine(GridView1.DataKeys.Count);
+            int id = (int)GridView1.DataKeys[i]["id"];
+        }
     }
 }

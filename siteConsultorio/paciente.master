@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="funcionario.master.cs" Inherits="SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="paciente.master.cs" Inherits="SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -45,23 +45,15 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastrar</a>
-                            <ul class="dropdown-menu">
-                                <li><a runat="server" href="~/Account/esp.aspx">Cadastrar Especialidade</a></li>
-                                <li><a runat="server" href="~/Account/CadastroMed.aspx">Cadastrar Medico</a></li>
-                                <li><a runat="server" href="~/Account/CadastroPac.aspx">Cadastrar Paciente</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a runat="server" href="~/agenda.aspx">Consultas</a></li>
-                        <li><a runat="server" href="~/vPac.aspx">Ver Paciente</a></li>
+                        <li><a runat="server" href="~/agConsulta.aspx">Agendar Consulta</a></li>
+                        <li><a runat="server" href="~/vConsultas.aspx">Ver Consultas Anteriores</a></li>
                     </ul>
-                    <div class="navbar-collapse collapse" style="right: 0%;">
+                </div>
+                <div class="navbar-collapse collapse" style="right: 0%;">
                     <ul class="nav navbar-nav">
-                        <li><button onclick="logout" runat="server" Text="Log Out" style="background-color: transparent; color: gray"></button>
+                        <li><button onclick="logout" text="Log Out" style="background-color: transparent; color: gray"></button>
                     </ul>
                     
-                </div>
                 </div>
             </div>
         </div>

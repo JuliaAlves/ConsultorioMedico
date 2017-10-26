@@ -15,14 +15,14 @@ public partial class agenda : System.Web.UI.Page
         if (Session["usuario"] == null)
             Response.Redirect("Default.aspx");
         else
-            con = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);        
+            con = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
         string nome = ddlMedico.SelectedItem.ToString();
-        con.Open();
-        string comando = "sp_verConsultas ";
+        /*con.Open();
+        string comando = "sp_verConsultas ";*/
     }
 
     protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
@@ -43,9 +43,37 @@ public partial class agenda : System.Web.UI.Page
     {
         if (e.CommandName == "edit")
         {
-            int i = int.Parse((string)e.CommandArgument);
+            int i = Convert.ToInt32(e.CommandArgument);
             Console.WriteLine(GridView1.DataKeys.Count);
-            int id = (int)GridView1.DataKeys[i]["id"];
+            string medico = ddlMedico.SelectedValue.ToString();
+            string nome = GridView1.Rows[i].Cells[0].Text;
+            string hora = GridView1.Rows[i].Cells[1].Text;
+            
+
+            con.Open();
+            string cmd = "SELECT id FROM paciente WHERE nome='" + nome + "'";            
+            SqlCommand sqlcmd = new SqlCommand(cmd, con);
+            SqlDataReader sqlDr = sqlcmd.ExecuteReader();
+            sqlDr.Read();
+            int idPaciente = (int)sqlDr["id"];
+
+            cmd = "SELECT id FROM medico WHERE nome = '" + medico + "'";
+            sqlDr.Close();
+            sqlcmd = new SqlCommand(cmd, con);
+            sqlDr = sqlcmd.ExecuteReader();
+            sqlDr.Read();
+            int idMedico = (int)sqlDr["id"];
+            
+
+            
+
+            cmd = "SELECT id FROM Consulta WHERE codMedico = " + idMedico + " AND codPaciente = " + idPaciente + " AND hora = '"+hora+"'";
+            sqlcmd = new SqlCommand(cmd, con);
+            sqlDr.Close();
+            sqlDr = sqlcmd.ExecuteReader();
+            sqlDr.Read();
+            Response.Redirect("edConsulta.aspx?id=" + sqlDr["id"].ToString());
         }
+
     }
 }

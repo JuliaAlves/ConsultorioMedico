@@ -11,24 +11,31 @@
     <p>
     
         <asp:Label ID="Label1" runat="server" Text="Diagnóstico:" Font-Bold="True"></asp:Label>
-        &nbsp;<textarea id="txtDiag" rows="6" name="S1" rows="2" class="form-control"></textarea></p>
+        &nbsp;</p>
+        <p>
+    
+            <asp:TextBox ID="txtDiag" runat="server" Height="123px" TextMode="MultiLine" Width="1045px"></asp:TextBox>
+        </p>
         <p>
     
             &nbsp;</p>
         <p>
     
+        <asp:Label ID="Label2" runat="server" Text="Exames:" Font-Bold="True"></asp:Label>
+            </p>
+        <p>
+    
+            <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="True" DataSourceID="dsExames" DataTextField="descricao" DataValueField="descricao" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged"></asp:ListBox>
+            <asp:SqlDataSource ID="dsExames" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" SelectCommand="SELECT * FROM [Exame] WHERE ([codConsulta] = @codConsulta)">
+                <SelectParameters>
+                    <asp:QueryStringParameter Name="codConsulta" QueryStringField="id" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Adicionar Exame" />
+        </p>
+        <p>
+    
             &nbsp;</p>
-        <p>
-    
-        <asp:Label ID="Label2" runat="server" Text="Descrição Exame:" Font-Bold="True"></asp:Label>
-            <textarea id="txtDesc" rows="6" name="S2" rows="2" class="form-control" cols="20"></textarea></p>
-        <p>
-    
-            &nbsp;</p>
-        <p>
-    
-        <asp:Label ID="Label3" runat="server" Text="Resultado Exame:" Font-Bold="True"></asp:Label>
-            <textarea id="txtResul" rows="6" name="S3" rows="2" class="form-control" cols="20"></textarea></p>
         <p>
     
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>

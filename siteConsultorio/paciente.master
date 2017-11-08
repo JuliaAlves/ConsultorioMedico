@@ -45,13 +45,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/agConsulta.aspx">Agendar Consulta</a></li>
+                        <li><a runat="server" href="~/agConsultaPac.aspx">Agendar Consulta</a></li>
                         <li><a runat="server" href="~/vConsultas.aspx">Ver Consultas Anteriores</a></li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse collapse" style="right: 0%;">
-                    <ul class="nav navbar-nav">
-                        <li><button onclick="logout" text="Log Out" style="background-color: transparent; color: gray"></button>
+                        <li><a runat="server" href="~/vExames.aspx">Ver Exames</a></li>
+                    </ul>                
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a runat="server" href="Default.aspx">Log Out</a>
                     </ul>
                     
                 </div>

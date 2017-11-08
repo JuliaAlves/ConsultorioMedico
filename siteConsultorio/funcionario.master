@@ -54,14 +54,11 @@
                         </li>
 
                         <li><a runat="server" href="~/agenda.aspx">Consultas</a></li>
-                        <li><a runat="server" href="~/vPac.aspx">Ver Paciente</a></li>
+                        <li><a runat="server" href="~/vPac.aspx">Ver Paciente</a></li>                        
                     </ul>
-                    <div class="navbar-collapse collapse" style="right: 0%;">
-                    <ul class="nav navbar-nav">
-                        <li><button onclick="logout" runat="server" Text="Log Out" style="background-color: transparent; color: gray"></button>
+                    <ul class="nav navbar-nav navbar-right">
+                                <li><a href="Default.aspx" runat="server" style="right:10px;">Log Out</a>
                     </ul>
-                    
-                </div>
                 </div>
             </div>
         </div>

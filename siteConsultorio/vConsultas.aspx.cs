@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _Default : Page
+public partial class vConsultas : System.Web.UI.Page
 {
-    SqlConnection conexao;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["usuario"] = null;
-    }   
-
- 
+        if (Session["usuario"] == null)
+            Response.Redirect("Default.aspx");
+    }
 }

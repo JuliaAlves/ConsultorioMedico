@@ -23,15 +23,6 @@ public partial class Account_Register : Page
             conexao = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
 
         conexao.Open();
-
-        for (int i = 9; i < 17; i++)
-        {
-            if (i >= 12 && i <= 14)
-                continue;
-
-            ddlHora.Items.Add("" + i + ":00");
-            ddlHora.Items.Add("" + i + ":30");
-        }
     }
 
 
@@ -52,5 +43,36 @@ public partial class Account_Register : Page
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+
+    protected void ddlHora_DataBinding(object sender, EventArgs e)
+    {
+        ddlHora.Items.Clear();
+    }
+
+    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+    {
+        DateTime dataEscolhida = Calendar1.SelectedDate;
+        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '"+ddlMedico.SelectedValue+"'";
+        SqlCommand cmd = new SqlCommand(comando, conexao);
+        SqlDataReader drHora = cmd.ExecuteReader();
+        drHora.Read();
+        for (int i = 9; i < 17; i++)
+        {
+            if (i >= 12 && i <= 14)
+                continue;
+
+            string hora = i + ":00";
+            if (drHora["hora"].ToString() == hora)
+                drHora.Read();
+            else
+                ddlHora.Items.Add(hora);
+
+            hora = i + ":30";
+            if(drHora["hora"].ToString() == hora)
+                ddlHora.Items.Add("" + i + ":30");
+            else
+                drHora.Read();
+        }
     }
 }

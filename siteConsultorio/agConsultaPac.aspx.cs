@@ -24,14 +24,15 @@ public partial class Account_Register : Page
 
         conexao.Open();
 
-        for (int i = 9; i < 17; i++)
-        {
-            if (i >= 12 && i <= 14)
-                continue;
+        if(!IsPostBack)
+            for (int i = 9; i < 17; i++)
+            {
+                if (i >= 12 && i <= 14)
+                    continue;
 
-            ddlHora.Items.Add("" + i + ":00");
-            ddlHora.Items.Add("" + i + ":30");
-        }
+                ddlHora.Items.Add("" + i + ":00");
+                ddlHora.Items.Add("" + i + ":30");
+            }
     }
 
     protected void Unnamed2_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ public partial class Account_Register : Page
         SqlDataReader sqldr = cmd.ExecuteReader();
         sqldr.Read();
         int idPaciente = Convert.ToInt32(sqldr["idPaciente"]);
+        sqldr.Close();
 
         comando = "INSERT INTO Consulta VALUES(@pac, @med, null, null, @h, @d, @si)";
         cmd.CommandText = comando;
@@ -72,23 +74,32 @@ public partial class Account_Register : Page
         string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '" + ddlMedico.SelectedValue + "'";
         SqlCommand cmd = new SqlCommand(comando, conexao);
         SqlDataReader drHora = cmd.ExecuteReader();
-        drHora.Read();
+        bool hasRows = drHora.HasRows;
+        ddlHora.Items.Clear();
+        if(hasRows)
+            drHora.Read();
         for (int i = 9; i < 17; i++)
         {
             if (i >= 12 && i <= 14)
                 continue;
 
             string hora = i + ":00";
-            if (drHora["hora"].ToString().Equals(hora))
-                drHora.Read();
-            else
+            if (!hasRows)
                 ddlHora.Items.Add(hora);
+            else
+                if (drHora["hora"].ToString().Equals(hora))
+                    hasRows = drHora.Read();
+                else
+                    ddlHora.Items.Add(hora);
 
             hora = i + ":30";
-            if (drHora["hora"].ToString() == hora)
-                ddlHora.Items.Add("" + i + ":30");
+            if (!hasRows)
+                ddlHora.Items.Add(hora);
             else
-                drHora.Read();
-        }
+                if (drHora["hora"].ToString().Equals(hora))
+                    hasRows = drHora.Read();
+                else
+                    ddlHora.Items.Add(hora);
+        }        
     }
 }

@@ -100,6 +100,6 @@ public partial class Account_Register : Page
                     hasRows = drHora.Read();
                 else
                     ddlHora.Items.Add(hora);
-        }        
+        }
     }
 }

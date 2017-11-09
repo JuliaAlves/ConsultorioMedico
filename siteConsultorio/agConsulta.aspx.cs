@@ -53,26 +53,35 @@ public partial class Account_Register : Page
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
     {
         DateTime dataEscolhida = Calendar1.SelectedDate;
-        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '"+ddlMedico.SelectedValue+"'";
+        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '" + ddlMedico.SelectedValue + "'";
         SqlCommand cmd = new SqlCommand(comando, conexao);
         SqlDataReader drHora = cmd.ExecuteReader();
-        drHora.Read();
+        bool hasRows = drHora.HasRows;
+        ddlHora.Items.Clear();
+        if (hasRows)
+            drHora.Read();
         for (int i = 9; i < 17; i++)
         {
             if (i >= 12 && i <= 14)
                 continue;
 
             string hora = i + ":00";
-            if (drHora["hora"].ToString() == hora)
-                drHora.Read();
-            else
+            if (!hasRows)
                 ddlHora.Items.Add(hora);
+            else
+                if (drHora["hora"].ToString().Equals(hora))
+                    hasRows = drHora.Read();
+                else
+                    ddlHora.Items.Add(hora);
 
             hora = i + ":30";
-            if(drHora["hora"].ToString() == hora)
-                ddlHora.Items.Add("" + i + ":30");
+            if (!hasRows)
+                ddlHora.Items.Add(hora);
             else
-                drHora.Read();
+                if (drHora["hora"].ToString().Equals(hora))
+                    hasRows = drHora.Read();
+                else
+                    ddlHora.Items.Add(hora);
         }
     }
 }

@@ -15,7 +15,12 @@ public partial class paginafuncionario : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Session["usuario"] == null)
+        {
+            Response.Redirect("~/Default.aspx");
+            return;
+        }
+
         con = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
         string cmd = "SELECT idMedico FROM usuarioMedico WHERE idUsuario = '" +Session["usuario"]+"'";
         SqlCommand comando = new SqlCommand(cmd, con);
@@ -35,7 +40,7 @@ public partial class paginafuncionario : System.Web.UI.Page
                 lblCel.Text   = "Celular: " + rdr["celular"].ToString();
                 lblEmail.Text = "Email: " + rdr["email"].ToString();
                 lblTel.Text   = "Telefone residencial: " + rdr["telResidencial"].ToString();
-                lblNasc.Text  = "Data de Nascimento: " + rdr["dataNasc"].ToString();
+                lblNasc.Text  = "Data de Nascimento: " + ((DateTime)rdr["dataNasc"]).ToString("dd/MM/yyyy");
 
                 System.Drawing.Image img;
                 var vetbyte = (byte[])rdr["foto"];

@@ -34,12 +34,19 @@ public partial class Account_Register : Page
         }
     }
 
-
     protected void Unnamed2_Click(object sender, EventArgs e)
     {
-        string comando = "INSERT INTO Consulta VALUES(@pac, @med, null, null, @h, @d, @si)";
-        SqlCommand cmd = new SqlCommand(comando, conexao);
-        cmd.Parameters.AddWithValue("pac", ddlPaciente.SelectedValue);
+        string comando = "SELECT idPaciente FROM usuarioPaciente WHERE idUsuario = '" + Session["usuario"] + "'";
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandText = comando;
+        cmd.Connection = conexao;
+        SqlDataReader sqldr = cmd.ExecuteReader();
+        sqldr.Read();
+        int idPaciente = Convert.ToInt32(sqldr["idPaciente"]);
+
+        comando = "INSERT INTO Consulta VALUES(@pac, @med, null, null, @h, @d, @si)";
+        cmd.CommandText = comando;
+        cmd.Parameters.AddWithValue("pac", idPaciente);
         cmd.Parameters.AddWithValue("med", ddlMedico.SelectedValue);
         cmd.Parameters.AddWithValue("h", ddlHora.SelectedValue);
         cmd.Parameters.AddWithValue("d", Calendar1.SelectedDate);
@@ -72,7 +79,7 @@ public partial class Account_Register : Page
                 continue;
 
             string hora = i + ":00";
-            if (drHora["hora"].ToString() == hora)
+            if (drHora["hora"].ToString().Equals(hora))
                 drHora.Read();
             else
                 ddlHora.Items.Add(hora);

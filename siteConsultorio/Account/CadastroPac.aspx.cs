@@ -15,12 +15,7 @@ public partial class Account_Register : Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["usuario"] == null)
-        {
-            Response.Redirect("..\\Default.aspx");
-        }
-        else
-            conexao = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
+        conexao = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
     }
     protected void CreateUser_Click(object sender, EventArgs e)
     {
@@ -102,7 +97,7 @@ public partial class Account_Register : Page
 
                 cmd.ExecuteNonQuery();
 
-                lblS.Text = "Paciente registrado!";
+                Response.Redirect("Login.aspx");
             }
         }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/funcionario.Master" AutoEventWireup="true" CodeFile="CadastroPac.aspx.cs" Inherits="Account_Register" %>
+﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="CadastroPac.aspx.cs" Inherits="Account_Register" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2>&nbsp;</h2>
@@ -8,7 +8,7 @@
         </p>
 
         <div class="form-horizontal" >
-            <h4>Registre um paciente.</h4>
+            <h4>Registre-se</h4>
             <hr />
             <asp:ValidationSummary runat="server" CssClass="text-danger" />
             <div class="form-group">

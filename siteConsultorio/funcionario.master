@@ -49,12 +49,18 @@
                             <ul class="dropdown-menu">
                                 <li><a runat="server" href="~/Account/esp.aspx">Cadastrar Especialidade</a></li>
                                 <li><a runat="server" href="~/Account/CadastroMed.aspx">Cadastrar Medico</a></li>
-                                <li><a runat="server" href="~/Account/CadastroPac.aspx">Cadastrar Paciente</a></li>
                             </ul>
                         </li>
 
-                        <li><a runat="server" href="~/agenda.aspx">Consultas</a></li>
-                        <li><a runat="server" href="~/vPac.aspx">Ver Paciente</a></li>                        
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Consultas</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" href="~/agendaMedico.aspx">Consultas por médico</a></li>
+                                <li><a runat="server" href="~/agendaDia.aspx">Consultas do dia</a></li>
+                            </ul>
+                        </li>
+                        <li><a runat="server" href="~/vPac.aspx">Ver Paciente</a></li>    
+                        <li><a runat="server" href="~/agConsulta.aspx">Agendar Consulta</a></li>   
+                        <li><a runat="server" href="~/relatorios.aspx">Relatórios de Medição</a></li>                    
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                                 <li><a href="Default.aspx" runat="server" style="right:10px;">Log Out</a>
@@ -67,7 +73,6 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>- My ASP.NET Application</p>
             </footer>
         </div>
     </form>

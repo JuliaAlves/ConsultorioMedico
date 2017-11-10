@@ -23,16 +23,6 @@ public partial class Account_Register : Page
             conexao = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
 
         conexao.Open();
-
-        if(!IsPostBack)
-            for (int i = 9; i < 17; i++)
-            {
-                if (i >= 12 && i <= 14)
-                    continue;
-
-                ddlHora.Items.Add("" + i + ":00");
-                ddlHora.Items.Add("" + i + ":30");
-            }
     }
 
     protected void Unnamed2_Click(object sender, EventArgs e)
@@ -55,7 +45,7 @@ public partial class Account_Register : Page
         cmd.Parameters.AddWithValue("si", 0);
 
         cmd.ExecuteNonQuery();
-        lblS.Text = "Consulta agendada";
+        Response.Redirect("vConsultas.aspx");
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)

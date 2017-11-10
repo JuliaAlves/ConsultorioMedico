@@ -37,7 +37,7 @@ public partial class Account_Register : Page
         cmd.Parameters.AddWithValue("si", 0);
 
         cmd.ExecuteNonQuery();
-        lblS.Text = "Consulta agendada";
+        Response.Redirect("agendaMedico.aspx");
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)

@@ -8,6 +8,4 @@
         Campinas (SP)
     </address>
 
-    <address>
-        <strong>Suporte:</strong>   <a href="mailto:Support@example.com">Support@example.com</a></address>
-</asp:Content>
+    </asp:Content>

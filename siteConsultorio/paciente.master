@@ -41,7 +41,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" runat="server" href="~/paginafuncionario" id="nome">&nbsp;&nbsp; </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="navbar-brand" runat="server" href="~/paginapaciente" id="nome">&nbsp;&nbsp; </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">

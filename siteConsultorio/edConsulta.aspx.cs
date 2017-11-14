@@ -25,6 +25,15 @@ public partial class edConsulta : System.Web.UI.Page
             SqlCommand sqlcmd = new SqlCommand(comando, conexao);
             SqlDataReader dr = sqlcmd.ExecuteReader();
             dr.Read();
+            if(((DateTime)dr["data"]).Date.CompareTo(DateTime.Now.Date)<0)
+            {
+                Label5.Visible = true;
+                Label5.ForeColor = System.Drawing.Color.Red;
+                Label5.Text = "Não é possível alterar uma consulta de um dia anterior ao atual";
+                txtDiag.Enabled = false;
+                ddlSit.Enabled = false;
+                bntTerm.Enabled = false;
+            }
             if (dr["diagnostico"] != null)
                 if(!IsPostBack)
                     txtDiag.Text = dr["diagnostico"].ToString();

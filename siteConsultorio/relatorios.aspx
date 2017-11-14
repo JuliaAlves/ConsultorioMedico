@@ -8,7 +8,7 @@
     <br />
     <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="Consultas  Mensais por Médico"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="Consultas  Mensais por Médico" Font-Size="Large"></asp:Label>
     <br />
     <br />
     <asp:Chart ID="Chart1" runat="server" DataSourceID="SqlDataSource1">
@@ -21,16 +21,18 @@
         </asp:ChartArea>
     </chartareas>
 </asp:Chart>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label4" runat="server" Font-Bold="True" Text="Não há dados para este mês" Visible="False"></asp:Label>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" SelectCommand="SELECT count(c.codMedico), m.nome FROM Consulta c INNER JOIN Medico m ON m.id=c.codMedico 
 WHERE 
 MONTH(c.data)= MONTH(GETDATE())
-GROUP BY m.nome"></asp:SqlDataSource>
+GROUP BY m.nome" OnSelected="SqlDataSource1_Selected"></asp:SqlDataSource>
     <br />
     <br />
     <br />
     <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Consultas diárias por Especialidade"></asp:Label>
+    <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Consultas diárias por Especialidade" Font-Size="Large"></asp:Label>
     <br />
     <br />
     <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource2">
@@ -49,9 +51,49 @@ INNER JOIN Especializacao e ON e.id= m.codEspecializacao
 WHERE  
 DAY(c.data)= DAY(GETDATE())
 GROUP BY 
-e.nome"></asp:SqlDataSource>
+e.nome" OnSelected="SqlDataSource2_Selected"></asp:SqlDataSource>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label5" runat="server" Font-Bold="True" Text="Não há dados para este dia" Visible="False"></asp:Label>
+    <br />
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <br />
+&nbsp;&nbsp;&nbsp;
+    <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" Text="Consultas por pacientes"></asp:Label>
+    <br />
+    <asp:Chart ID="Chart3" runat="server" DataSourceID="SqlDataSource3">
+        <Series>
+            <asp:Series ChartType="Bar" Name="Series1" XValueMember="nome" YValueMembers="Column1">
+            </asp:Series>
+        </Series>
+        <ChartAreas>
+            <asp:ChartArea Name="ChartArea1">
+            </asp:ChartArea>
+        </ChartAreas>
+    </asp:Chart>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" OnSelected="SqlDataSource3_Selected" SelectCommand="SELECT count(c.id), p.nome FROM consulta c, paciente p WHERE p.id = c.codPaciente GROUP BY p.nome"></asp:SqlDataSource>
+    <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label6" runat="server" Font-Bold="True" Text="Não há dados para pacientes" Visible="False"></asp:Label>
     <br />
     <br />
     <br />
+    <br />
+    <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Large" Text="Consultas canceladas por mês"></asp:Label>
+    <br />
+    <asp:Chart ID="Chart4" runat="server" DataSourceID="SqlDataSource4">
+        <Series>
+            <asp:Series Name="Series1">
+            </asp:Series>
+        </Series>
+        <ChartAreas>
+            <asp:ChartArea Name="ChartArea1">
+            </asp:ChartArea>
+        </ChartAreas>
+    </asp:Chart>
+    <asp:SqlDataSource ID="SqlDataSource4" runat="server"></asp:SqlDataSource>
 </asp:Content>
 

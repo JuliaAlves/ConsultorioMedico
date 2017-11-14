@@ -11,18 +11,24 @@ using System.Text;
 
 public partial class Account_Register : Page
 {
-    SqlConnection conexao;
+    private SqlConnection conexao;
+    private int codMedico;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["usuario"] == null)
-        {
             Response.Redirect("Default.aspx");
-        }
         else
+        {
             conexao = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
-
-        conexao.Open();
+            conexao.Open();
+            string cmd = "SELECT idMedico FROM usuarioMedico WHERE idUsuario = '" + Session["usuario"] + "'";
+            SqlCommand sqlcmd = new SqlCommand(cmd, conexao);
+            SqlDataReader dr = sqlcmd.ExecuteReader();
+            dr.Read();
+            codMedico = Convert.ToInt32(dr["idMedico"]);
+            dr.Close();
+        }
     }
 
 
@@ -31,7 +37,7 @@ public partial class Account_Register : Page
         string comando = "INSERT INTO Consulta VALUES(@pac, @med, null, null, @h, @d, @si)";
         SqlCommand cmd = new SqlCommand(comando, conexao);
         cmd.Parameters.AddWithValue("pac", ddlPaciente.SelectedValue);
-        cmd.Parameters.AddWithValue("med", ddlMedico.SelectedValue);
+        cmd.Parameters.AddWithValue("med", codMedico);
         cmd.Parameters.AddWithValue("h", ddlHora.SelectedValue);
         cmd.Parameters.AddWithValue("d", Calendar1.SelectedDate);
         cmd.Parameters.AddWithValue("si", 0);
@@ -53,7 +59,7 @@ public partial class Account_Register : Page
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
     {
         DateTime dataEscolhida = Calendar1.SelectedDate;
-        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '" + ddlMedico.SelectedValue + "'";
+        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '" + codMedico + "'";
         SqlCommand cmd = new SqlCommand(comando, conexao);
         SqlDataReader drHora = cmd.ExecuteReader();
         bool hasRows = drHora.HasRows;

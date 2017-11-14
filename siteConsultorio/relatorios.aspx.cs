@@ -11,4 +11,23 @@ public partial class relatorios : System.Web.UI.Page
     {
 
     }
+
+
+    protected void SqlDataSource1_Selected(object sender, SqlDataSourceStatusEventArgs e)
+    {
+        if (e.AffectedRows == 0)
+            Label4.Visible = true;
+    }
+
+    protected void SqlDataSource2_Selected(object sender, SqlDataSourceStatusEventArgs e)
+    {
+        if (e.AffectedRows == 0)
+            Label5.Visible = true;
+    }
+
+    protected void SqlDataSource3_Selected(object sender, SqlDataSourceStatusEventArgs e)
+    {
+        if (e.AffectedRows == 0)
+            Label6.Visible = true;
+    }
 }

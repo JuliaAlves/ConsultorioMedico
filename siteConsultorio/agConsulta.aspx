@@ -12,14 +12,6 @@
         <div class="form-group">
             <br />
             <br />
-    <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Nome do Médico:"></asp:Label>
-            <br />
-            <br />
-    <asp:DropDownList ID="ddlMedico" runat="server" DataSourceID="SqlDataSource1" DataTextField="nome" DataValueField="id" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" CssClass="btn btn-default btn-sm">
-    </asp:DropDownList>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" SelectCommand="SELECT [nome], [id] FROM [Medico]"></asp:SqlDataSource>
-            <br />
-            <br />
             <br />
     <asp:Label ID="Label7" runat="server" Font-Bold="True" Text="Nome do Paciente:"></asp:Label>
             <br />

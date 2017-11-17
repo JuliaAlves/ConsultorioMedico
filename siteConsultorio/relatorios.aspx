@@ -86,7 +86,7 @@ e.nome" OnSelected="SqlDataSource2_Selected"></asp:SqlDataSource>
     <br />
     <asp:Chart ID="Chart4" runat="server" DataSourceID="SqlDataSource4">
         <Series>
-            <asp:Series Name="Series1">
+            <asp:Series Name="Series1" XValueMember="Column1" YValueMembers="Column2">
             </asp:Series>
         </Series>
         <ChartAreas>
@@ -94,6 +94,10 @@ e.nome" OnSelected="SqlDataSource2_Selected"></asp:SqlDataSource>
             </asp:ChartArea>
         </ChartAreas>
     </asp:Chart>
-    <asp:SqlDataSource ID="SqlDataSource4" runat="server"></asp:SqlDataSource>
-</asp:Content>
+    <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" OnSelected="SqlDataSource4_Selected" SelectCommand="SELECT DateName(month, DateAdd(month, MONTH(data), 0)-1), count(id) FROM Consulta WHERE situacao = 0 AND data&lt;CONVERT(date, GETDATE())
+GROUP BY MONTH(data)"></asp:SqlDataSource>
+    <br />
+&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label8" runat="server" Font-Bold="True" Text="Não há dados para consultas canceladas" Visible="False"></asp:Label>
+    </asp:Content>
 

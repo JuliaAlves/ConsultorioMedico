@@ -5,7 +5,7 @@
     <br />
     <asp:Label ID="Label1" runat="server" Font-Bold="True"></asp:Label>
     <br />
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="id,id1,id2" DataSourceID="SqlDataSource1">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="id,id1,id2" DataSourceID="SqlDataSource1" CssClass="table table-striped table-bordered table-hover">
         <Columns>
             <asp:BoundField DataField="nome" HeaderText="Médico" SortExpression="nome" />
             <asp:BoundField DataField="nome1" HeaderText="Paciente" SortExpression="nome1" />

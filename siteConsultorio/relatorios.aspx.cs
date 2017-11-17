@@ -30,4 +30,10 @@ public partial class relatorios : System.Web.UI.Page
         if (e.AffectedRows == 0)
             Label6.Visible = true;
     }
+
+    protected void SqlDataSource4_Selected(object sender, SqlDataSourceStatusEventArgs e)
+    {
+        if (e.AffectedRows == 0)
+            Label8.Visible = true;
+    }
 }

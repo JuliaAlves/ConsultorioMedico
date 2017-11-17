@@ -6,16 +6,10 @@
         <Columns>
             <asp:BoundField DataField="nome" HeaderText="nome" SortExpression="nome" />
             <asp:BoundField DataField="endereco" HeaderText="endereco" SortExpression="endereco" />
-            <asp:BoundField DataField="dataNasc" HeaderText="dataNasc" SortExpression="dataNasc" />
+            <asp:BoundField DataField="Column1" HeaderText="data nascimento" SortExpression="Column1" DataFormatString="{0:d}" ReadOnly="True" />
             <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
             <asp:BoundField DataField="celular" HeaderText="celular" SortExpression="celular" />
-            <asp:BoundField DataField="telResidencial" HeaderText="telResidencial" SortExpression="telResidencial" />
-            <asp:BoundField DataField="nome" HeaderText="nome" SortExpression="nome" />
-            <asp:BoundField DataField="endereco" HeaderText="endereco" SortExpression="endereco" />
-            <asp:BoundField DataField="dataNasc" HeaderText="dataNasc" SortExpression="dataNasc" />
-            <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
-            <asp:BoundField DataField="celular" HeaderText="celular" SortExpression="celular" />
-            <asp:ButtonField CommandName="vExames" Text="Ver exames" CausesValidation="True" />
+            <asp:BoundField DataField="telResidencial" HeaderText="telefone residencial" SortExpression="telResidencial" />
         </Columns>
         <RowStyle Font-Size="14pt" />
         </asp:GridView>
@@ -32,7 +26,7 @@
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>">
         </asp:SqlDataSource>
         <br />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" SelectCommand="SELECT [nome], [endereco], [dataNasc], [email], [celular], [telResidencial] FROM [Paciente]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" SelectCommand="SELECT nome, endereco, CONVERT(date, dataNasc), email, celular, telResidencial FROM Paciente"></asp:SqlDataSource>
     </div>
 </asp:Content>
 

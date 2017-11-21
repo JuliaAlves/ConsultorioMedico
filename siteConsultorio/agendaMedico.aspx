@@ -28,11 +28,13 @@
         <br />
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnRowCreated="GridView1_RowCreated" OnRowDeleting="GridView1_RowDeleting" OnRowCommand="GridView1_RowCommand" CssClass="table table-striped table-bordered table-hover">
             <Columns>
+                <asp:BoundField DataField="id" HeaderText="ID" SortExpression="id" />
                 <asp:BoundField DataField="nome" HeaderText="nome" SortExpression="nome" >
                 </asp:BoundField>
                 <asp:BoundField DataField="hora" HeaderText="hora" SortExpression="hora" >
                 </asp:BoundField>
                 <asp:ButtonField CommandName="edit" Text="Adicionar Diagnóstico" />
+                <asp:ButtonField CommandName="email" Text="Enviar Email" />
             </Columns>
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD16173ConnectionString %>" SelectCommand="sp_verConsultas" SelectCommandType="StoredProcedure">
@@ -45,6 +47,6 @@
         &nbsp;
         <asp:Button ID="btnAgendar" runat="server" OnClick="btnAgendar_Click" Text="Agendar nova consulta" CssClass="btn btn-default" Width="173px"/>
         <br />
-    &nbsp;
+        <br />
     </div>
 </asp:Content>

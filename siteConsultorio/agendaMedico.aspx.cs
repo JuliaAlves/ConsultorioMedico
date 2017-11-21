@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Web.Configuration;
+using System.Net.Mail;
 
 public partial class agenda : System.Web.UI.Page
 {
@@ -45,8 +46,8 @@ public partial class agenda : System.Web.UI.Page
         {
             int i = Convert.ToInt32(e.CommandArgument);
             string medico = ddlMedico.SelectedValue.ToString();
-            string nome = GridView1.Rows[i].Cells[0].Text;
-            string hora = GridView1.Rows[i].Cells[1].Text;
+            string nome = GridView1.Rows[i].Cells[1].Text;
+            string hora = GridView1.Rows[i].Cells[2].Text;
             
 
             con.Open();
@@ -72,6 +73,32 @@ public partial class agenda : System.Web.UI.Page
             sqlDr = sqlcmd.ExecuteReader();
             sqlDr.Read();
             Response.Redirect("edConsulta.aspx?id=" + sqlDr["id"].ToString());
+        }
+
+        else if(e.CommandName == "email")
+        {
+
+            int i = Convert.ToInt32(e.CommandArgument);
+            string medico = ddlMedico.SelectedValue.ToString();
+            string data = cDia.SelectedDate.ToString();
+            string hora = GridView1.Rows[i].Cells[2].Text;
+
+            con.Open();
+            SqlCommand sqlcmd = new SqlCommand("SELECT p.email FROM Paciente p INNER JOIN Consulta c ON p.id = c.codPaciente WHERE c.id="+GridView1.Rows[i].Cells[0].Text, con);
+            SqlDataReader sqlDr = sqlcmd.ExecuteReader();
+            sqlDr.Read();
+
+            MailMessage mail = new MailMessage("consultoriomedico1337@gmail.com", (string)sqlDr["email"]);
+            SmtpClient client = new SmtpClient();
+            System.Net.NetworkCredential basicauthenticationinfo = new System.Net.NetworkCredential("consultoriomedico1337@gmail.com", "juliafrodobronze");
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "smtp.google.com";
+            client.Credentials = basicauthenticationinfo;
+            mail.Subject = "Consulta";
+            mail.Body = "Você tem uma consulta marcada para o dia "+ data+" às "+hora+" com o Médico "+medico+". \n Att. Consultório.";
+            client.Send(mail);
         }
 
     }

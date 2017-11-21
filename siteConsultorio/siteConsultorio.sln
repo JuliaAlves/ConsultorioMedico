@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "siteConsultorio", ".", "{B01169B9-5FA9-46B9-89D0-0A09DF556406}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "siteConsultorio(1)", ".", "{A47D1A2B-EE05-4C80-BC3C-F41CAD203D2A}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_4662"
-		Debug.AspNetCompiler.PhysicalPath = "F:\Tecnico\Projeto\ConsultorioMedico\siteConsultorio\"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\ConsultorioMedico\siteConsultorio\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4662\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_4662"
-		Release.AspNetCompiler.PhysicalPath = "F:\Tecnico\Projeto\ConsultorioMedico\siteConsultorio\"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\ConsultorioMedico\siteConsultorio\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4662\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
@@ -28,8 +28,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B01169B9-5FA9-46B9-89D0-0A09DF556406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B01169B9-5FA9-46B9-89D0-0A09DF556406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47D1A2B-EE05-4C80-BC3C-F41CAD203D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47D1A2B-EE05-4C80-BC3C-F41CAD203D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -88,17 +88,21 @@ public partial class agenda : System.Web.UI.Page
             SqlDataReader sqlDr = sqlcmd.ExecuteReader();
             sqlDr.Read();
 
-            MailMessage mail = new MailMessage("consultoriomedico1337@gmail.com", (string)sqlDr["email"]);
-            SmtpClient client = new SmtpClient();
-            System.Net.NetworkCredential basicauthenticationinfo = new System.Net.NetworkCredential("consultoriomedico1337@gmail.com", "juliafrodobronze");
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = "smtp.google.com";
-            client.Credentials = basicauthenticationinfo;
-            mail.Subject = "Consulta";
-            mail.Body = "Você tem uma consulta marcada para o dia "+ data+" às "+hora+" com o Médico "+medico+". \n Att. Consultório.";
-            client.Send(mail);
+            MailMessage objMail = new MailMessage();
+            objMail.From = new MailAddress("consultoriomedico1337@gmail.com", "Consultorio Medico");
+            objMail.Sender = objMail.From;
+            objMail.To.Add(new MailAddress(sqlDr["email"].ToString()));
+            objMail.Subject = "Consulta";
+            objMail.Body = "Você tem uma consulta marcada para o dia " + data + " às " + hora + " com o Médico " + medico + ". \n Att. Consultório.";
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("consultoriomedico1337@gmail.com", "juliafrodobronze");
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.EnableSsl = true;
+            smtp.Send(objMail);
+            
         }
 
     }

@@ -42,7 +42,7 @@
 
         <div class="col-md-4">
             <section id="socialLoginForm">
-                Se você não tem uma conta, entre em contato com o consultório para criar uma.<br />
+                Se você não tem uma conta, entre em contato com o consultório para criar uma ou <a href="CadastroPac.aspx">registre-se se você for um paciente</a>.<br />
             </section>
         </div>
     </div>

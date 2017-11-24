@@ -44,11 +44,19 @@ public partial class paginapaciente : System.Web.UI.Page
                 lblEnd.Text = "Endereço: " + rdr["endereco"].ToString();
 
                 System.Drawing.Image img;
-                var vetbyte = (byte[])rdr["foto"];
-                MemoryStream stream = new MemoryStream(vetbyte);
+                byte[] vetbyte;
+                MemoryStream stream = null;
+                if ((rdr["foto"]).GetType() != typeof(DBNull))
+                {
+                    vetbyte = (byte[])rdr["foto"];
+                    stream = new MemoryStream(vetbyte);
+                }
+                
                 if (stream == null || stream.Length == 0)
                 {
                     imgFoto.Visible = true;
+                    fupfoto.Enabled = true;
+                    fupfoto.Visible = true;
                     imgFoto.Enabled = true;
                     Label1.Visible = true;
                     btnEnviar.Visible = true;

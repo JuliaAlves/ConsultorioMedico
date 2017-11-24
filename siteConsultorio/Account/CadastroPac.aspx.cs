@@ -20,7 +20,7 @@ public partial class Account_Register : Page
     protected void CreateUser_Click(object sender, EventArgs e)
     {
         
-        if (fupFotoPac.PostedFile != null)
+        if (!String.IsNullOrEmpty(fupFotoPac.PostedFile.FileName))
         {
             string ext = Path.GetExtension(fupFotoPac.PostedFile.FileName);
             if (ext == ".jpg" || ext == ".png" || ext == ".gif" || ext == ".bmp")
@@ -99,6 +99,50 @@ public partial class Account_Register : Page
 
                 Response.Redirect("Login.aspx");
             }
+        }
+        else
+        {
+            string comando = "SELECT * FROM Paciente";
+
+            SqlCommand cmd = new SqlCommand(comando, conexao);
+            conexao.Open();
+            SqlDataReader sqldr = cmd.ExecuteReader();
+            int last = 0;
+            while (sqldr.Read())
+                last = sqldr.GetInt32(0);
+
+            sqldr.Close();
+
+
+
+            cmd.CommandText = "INSERT into Paciente Values (@id, @nome, @end, @nasc, @email, @cel, @tel, NULL)";
+            cmd.Parameters.AddWithValue("id", last + 1);
+            cmd.Parameters.AddWithValue("nome", txtNome.Text);
+            cmd.Parameters.AddWithValue("end", txtEnd.Text);
+            cmd.Parameters.AddWithValue("nasc", txtNasc.Text);
+            cmd.Parameters.AddWithValue("email", txtEmail.Text);
+            cmd.Parameters.AddWithValue("cel", txtCel.Text);
+            cmd.Parameters.AddWithValue("tel", txtTel.Text);
+
+            cmd.ExecuteNonQuery();
+
+            cmd.Parameters.Clear();
+
+            MD5 md5Hash = MD5.Create();
+            cmd.CommandText = "INSERT into Usuario Values(@id, @sen, 'Paciente')";
+            cmd.Parameters.AddWithValue("id", UserName.Text);
+            cmd.Parameters.AddWithValue("sen", GetMd5Hash(md5Hash, Password.Text));
+
+            cmd.ExecuteNonQuery();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "INSERT into usuarioPaciente Values(@id, @id2)";
+            cmd.Parameters.AddWithValue("id", last + 1);
+            cmd.Parameters.AddWithValue("id2", UserName.Text);
+
+            cmd.ExecuteNonQuery();
+
+            Response.Redirect("Login.aspx");
         }
 
     }

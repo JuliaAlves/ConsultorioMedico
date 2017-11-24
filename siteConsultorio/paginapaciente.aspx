@@ -10,7 +10,7 @@
     &nbsp;&nbsp;&nbsp;
     <div style="float: right" >
         <asp:Label ID="Label1" runat="server" Text="Envie uma imagem:" Visible="False"></asp:Label>
-        &nbsp;<asp:FileUpload ID="fupfoto" runat="server" Enabled="False" EnableTheming="True" EnableViewState="False" Visible="False" />
+        &nbsp;<asp:FileUpload ID="fupfoto" runat="server" Enabled="False" EnableTheming="True" Visible="False" />
         &nbsp;<br />
 &nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnEnviar" runat="server" Enabled="False" OnClick="btnEnviar_Click" Text="Enviar" Visible="False" />

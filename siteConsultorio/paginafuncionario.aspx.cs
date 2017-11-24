@@ -43,8 +43,14 @@ public partial class paginafuncionario : System.Web.UI.Page
                 lblNasc.Text  = "Data de Nascimento: " + ((DateTime)rdr["dataNasc"]).ToString("dd/MM/yyyy");
 
                 System.Drawing.Image img;
-                var vetbyte = (byte[])rdr["foto"];
-                MemoryStream stream = new MemoryStream(vetbyte);
+
+                byte[] vetbyte;
+                MemoryStream stream = null;
+                if(rdr["foto"].GetType() != typeof(DBNull)) 
+                {
+                    vetbyte = (byte[])rdr["foto"];
+                    stream = new MemoryStream(vetbyte);
+                }                    
                 if (stream == null || stream.Length == 0)
                 {
                     fupfoto.Visible = true;

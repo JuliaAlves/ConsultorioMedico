@@ -101,6 +101,48 @@ public partial class Account_Register : Page
                 lblS.Text = "Medico registrado!";
             }
         }
+        else
+        {
+            string comando = "SELECT * FROM Medico";
+
+            SqlCommand cmd = new SqlCommand(comando, conexao);
+            conexao.Open();
+            SqlDataReader sqldr = cmd.ExecuteReader();
+            int last = 0;
+            while (sqldr.Read())
+                last = sqldr.GetInt32(0);
+
+            sqldr.Close();
+
+            cmd.CommandText = "INSERT into Medico Values (@id, @nome, @nasc, @email, @cel, @tel, NULL, @esp)";
+            cmd.Parameters.AddWithValue("id", last + 1);
+            cmd.Parameters.AddWithValue("nome", txtNome.Text);
+            cmd.Parameters.AddWithValue("nasc", txtNasc.Text);
+            cmd.Parameters.AddWithValue("email", txtEmail.Text);
+            cmd.Parameters.AddWithValue("cel", txtCel.Text);
+            cmd.Parameters.AddWithValue("tel", txtTel.Text);
+            cmd.Parameters.AddWithValue("esp", ddlEsp.SelectedValue);
+
+            cmd.ExecuteNonQuery();
+
+            cmd.Parameters.Clear();
+
+            MD5 md5Hash = MD5.Create();
+            cmd.CommandText = "INSERT into Usuario Values(@id, @sen, 'Paciente')";
+            cmd.Parameters.AddWithValue("id", UserName.Text);
+            cmd.Parameters.AddWithValue("sen", GetMd5Hash(md5Hash, Password.Text));
+
+            cmd.ExecuteNonQuery();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "INSERT into usuarioMedico Values(@id, @id2)";
+            cmd.Parameters.AddWithValue("id", last + 1);
+            cmd.Parameters.AddWithValue("id2", UserName.Text);
+
+            cmd.ExecuteNonQuery();
+
+            lblS.Text = "Medico registrado!";
+        }
 
     }
 

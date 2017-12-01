@@ -59,7 +59,7 @@ public partial class Account_Register : Page
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
     {
         DateTime dataEscolhida = Calendar1.SelectedDate;
-        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '" + codMedico + "'";
+        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND (codMedico = '" + codMedico + "' OR codPaciente = '"+ddlPaciente.SelectedValue.ToString()+"')";
         SqlCommand cmd = new SqlCommand(comando, conexao);
         SqlDataReader drHora = cmd.ExecuteReader();
         bool hasRows = drHora.HasRows;

@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <asp:Label runat="server" AssociatedControlID="UserName" CssClass="control-label">Nome do Paciente:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="UserName" CssClass="control-label">Nome do Médico:</asp:Label>
                 <div>
                     <asp:TextBox runat="server" ID="txtNome" CssClass="form-control" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNome"

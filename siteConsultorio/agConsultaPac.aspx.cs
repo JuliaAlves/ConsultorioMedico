@@ -12,6 +12,7 @@ using System.Text;
 public partial class Account_Register : Page
 {
     SqlConnection conexao;
+    int idPaciente;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,23 +21,26 @@ public partial class Account_Register : Page
             Response.Redirect("Default.aspx");
         }
         else
+        {
             conexao = new SqlConnection(WebConfigurationManager.ConnectionStrings["BD16173ConnectionString"].ConnectionString);
+            conexao.Open();
 
-        conexao.Open();
+            string comando = "SELECT idPaciente FROM usuarioPaciente WHERE idUsuario = '" + Session["usuario"] + "'";
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = comando;
+            cmd.Connection = conexao;
+            SqlDataReader sqldr = cmd.ExecuteReader();
+            sqldr.Read();
+            idPaciente = Convert.ToInt32(sqldr["idPaciente"]);
+            sqldr.Close();         
+        }
     }
 
     protected void Unnamed2_Click(object sender, EventArgs e)
     {
-        string comando = "SELECT idPaciente FROM usuarioPaciente WHERE idUsuario = '" + Session["usuario"] + "'";
+        string comando = "INSERT INTO Consulta VALUES(@pac, @med, null, null, @h, @d, @si)";
         SqlCommand cmd = new SqlCommand();
-        cmd.CommandText = comando;
         cmd.Connection = conexao;
-        SqlDataReader sqldr = cmd.ExecuteReader();
-        sqldr.Read();
-        int idPaciente = Convert.ToInt32(sqldr["idPaciente"]);
-        sqldr.Close();
-
-        comando = "INSERT INTO Consulta VALUES(@pac, @med, null, null, @h, @d, @si)";
         cmd.CommandText = comando;
         cmd.Parameters.AddWithValue("pac", idPaciente);
         cmd.Parameters.AddWithValue("med", ddlMedico.SelectedValue);
@@ -61,7 +65,7 @@ public partial class Account_Register : Page
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
     {
         DateTime dataEscolhida = Calendar1.SelectedDate;
-        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND codMedico = '" + ddlMedico.SelectedValue + "'";
+        string comando = "SELECT hora FROM Consulta WHERE data = '" + dataEscolhida.ToString() + "' AND (codMedico = '" + ddlMedico.SelectedValue + "' OR codPaciente = '"+idPaciente+"')";
         SqlCommand cmd = new SqlCommand(comando, conexao);
         SqlDataReader drHora = cmd.ExecuteReader();
         bool hasRows = drHora.HasRows;

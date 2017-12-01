@@ -85,7 +85,7 @@ public partial class Account_Register : Page
                 cmd.Parameters.Clear();
 
                 MD5 md5Hash = MD5.Create();
-                cmd.CommandText = "INSERT into Usuario Values(@id, @sen, 'Paciente')";
+                cmd.CommandText = "INSERT into Usuario Values(@id, @sen, 'Funcionario')";
                 cmd.Parameters.AddWithValue("id", UserName.Text);
                 cmd.Parameters.AddWithValue("sen", GetMd5Hash(md5Hash,Password.Text));
 
